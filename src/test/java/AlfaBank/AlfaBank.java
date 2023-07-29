@@ -1,35 +1,36 @@
-package github.selenide;
-
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class ContributorToSelenide {
+public class AlfaBank {
 
     @BeforeAll
     static void beforeAll() {
+//        Configuration.baseUrl = "https://alfabank.ru/";
         Configuration.pageLoadStrategy = "eager";
         Configuration.browserSize = "1920x1080";
     }
 
     @Test
-    void andreySolncevFirstContributor() {
-        open("https://github.com/selenide/selenide");
-        $("div.Layout-sidebar").$(byText("Contributors"))
-                .closest("h2").sibling(0).$$("li").first().hover();
-//        $(".BorderGrid-cell .list-style-none [href=https://github.com/asolntsev]").shouldHave(text("asolntsev"));
-        $(".Popover-message").shouldHave(text("Andrei Solntsev"));
-//        $$(".Popover ").findBy(visible).shouldHave(text("Andrei Solntsev"));
-        sleep(5000);
+    void alfaBank() {
+        open("https://alfabank.ru/");
+        $("[title = Вклады]").click();
+        $("div#alfa-account.uG2mw").$(byText("Максимальный доход с первого месяца")).shouldHave(text("Максимальный доход с первого месяца"));
+
+        SelenideElement alfaButton = $("div#alfa-account.uG2mw");
+        $(alfaButton).$(byText("Максимальный доход с первого месяца")).shouldHave(text("Максимальный доход с первого месяца"));
+//        sleep(3000);
         // parent - переход в родителю
         // closest - ищет ближайший сверху родитель с таким названием
         // sibling - ищет соседа (брата)  по порядку от указанного элемента( вниз по дереву)
         // preceding - ищет соседа (брата) по порядку от указанного элемента( вверх по дереву)
+        //asdasd
 
     }
 }
